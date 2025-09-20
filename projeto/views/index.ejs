@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gerenciador de Tarefas</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1>📝 Minhas Tarefas</h1>
+  <form action="/add" method="POST">
+    <input type="text" name="title" placeholder="Nova tarefa" required />
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <ul>
+    <% tasks.forEach((task, index) => { %>
+      <li>
+        <%= task %>
+        <form action="/delete" method="POST" style="display:inline;">
+          <input type="hidden" name="index" value="<%= index %>" />
+          <button type="submit">🗑️</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
