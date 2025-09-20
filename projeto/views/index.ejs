@@ -6,19 +6,49 @@
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
+  <!-- Navegação -->
+  <nav>
+    <a href="/">📋 Tarefas</a>
+    <a href="/dashboard">📊 Dashboard</a>
+  </nav>
+
   <h1>📝 Minhas Tarefas</h1>
-  <form action="/add" method="POST">
-    <input type="text" name="title" placeholder="Nova tarefa" required />
+
+  <!-- Formulário de nova tarefa -->
+  <form action="/add" method="POST" class="task-form">
+    <input type="text" name="title" placeholder="Título" required />
+    <input type="text" name="description" placeholder="Descrição" required />
+    <select name="priority" required>
+      <option value="">Prioridade</option>
+      <option value="alta">Alta</option>
+      <option value="baixa">Baixa</option>
+    </select>
     <button type="submit">Adicionar</button>
   </form>
 
+  <!-- Contador de tarefas concluídas -->
+  <p><strong>Concluídas:</strong> <%= tasks.filter(t => t.done).length %> / <%= tasks.length %></p>
+
+  <!-- Lista de tarefas -->
   <ul>
     <% tasks.forEach((task, index) => { %>
-      <li>
-        <%= task %>
-        <form action="/delete" method="POST" style="display:inline;">
+      <li class="task-card <%= task.done ? 'done' : '' %> <%= task.priority %>">
+        <!-- Checkbox para marcar como concluída -->
+        <form action="/toggle" method="POST" style="display:inline;">
           <input type="hidden" name="index" value="<%= index %>" />
-          <button type="submit">🗑️</button>
+          <input type="checkbox" onchange="this.form.submit()" <%= task.done ? 'checked' : '' %> />
+        </form>
+
+        <!-- Conteúdo da tarefa -->
+        <div class="task-content">
+          <strong><%= task.title %></strong><br />
+          <span><%= task.description %></span>
+        </div>
+
+        <!-- Botão de exclusão com confirmação -->
+        <form action="/delete" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?');">
+          <input type="hidden" name="index" value="<%= index %>" />
+          <button type="submit" class="delete-btn">🗑️</button>
         </form>
       </li>
     <% }) %>

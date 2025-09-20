@@ -8,18 +8,29 @@ h1 {
   color: #333;
 }
 
-form {
+.task-form {
+  display: flex;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-input[type="text"] {
+.task-form input,
+.task-form select,
+.task-form button {
   padding: 8px;
-  width: 200px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
-button {
-  padding: 8px 12px;
-  margin-left: 5px;
+.task-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.task-form button:hover {
+  background-color: #0056b3;
 }
 
 ul {
@@ -27,9 +38,74 @@ ul {
   padding: 0;
 }
 
-li {
+.task-card {
   background: #fff;
+  padding: 12px;
   margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  border-left: 5px solid transparent;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+}
+
+.task-card.done {
+  text-decoration: line-through;
+  color: gray;
+  background-color: #e0e0e0;
+}
+
+.task-card.alta {
+  border-left-color: red;
+}
+
+.task-card.baixa {
+  border-left-color: green;
+}
+
+.task-content {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  text-align: center;
+  font-weight: bold;
+}
+
+.progress-bar {
+  background-color: #ddd;
+  border-radius: 20px;
+  height: 20px;
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  background-color: #28a745;
+  height: 100%;
+  transition: width 0.5s ease;
 }

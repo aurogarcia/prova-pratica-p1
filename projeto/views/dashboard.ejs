@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1>📊 Dashboard de Tarefas</h1>
+
+  <div class="grid">
+    <div class="card">Total: <strong><%= total %></strong></div>
+    <div class="card">Concluídas: <strong><%= done %></strong></div>
+    <div class="card">Pendentes: <strong><%= pending %></strong></div>
+    <div class="card">Conclusão: <strong><%= percent %>%</strong></div>
+  </div>
+
+  <h2>🕒 Últimas 5 tarefas</h2>
+  <ul>
+    <% latest.forEach(task => { %>
+      <li class="task-card <%= task.done ? 'done' : '' %> <%= task.priority %>">
+        <strong><%= task.title %></strong> — <%= task.description %>
+        <span>Status: <%= task.done ? '✅ Concluída' : '⏳ Pendente' %></span>
+      </li>
+    <% }) %>
+  </ul>
+
+  <h2>📈 Progresso</h2>
+  <div class="progress-bar">
+    <div class="progress" style="width: <%= percent %>%"></div>
+  </div>
+</body>
+</html>
